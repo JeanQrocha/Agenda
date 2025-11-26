@@ -2,7 +2,7 @@ import database from "../config/database.js"
 
 class Cliente {
     constructor() {
-        this.model = database.db.define('users', {
+        this.model = database.db.define('Clientes', {
             id: {
                 type: database.db.Sequelize.INTEGER,
                 primaryKey: true,

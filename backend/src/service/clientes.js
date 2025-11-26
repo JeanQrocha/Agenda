@@ -40,7 +40,6 @@ class ServiceCliente {
             senha: senhaCriptografada
         })
     }
-
     async Update(id, nome, email, senha) {
         //verificar se o indexe o nome sao validos e se for um numero. verificar se ele for menor q o .lenth
         if (!id || !nome || !email || !senha) {
