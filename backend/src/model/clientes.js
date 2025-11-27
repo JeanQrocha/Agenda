@@ -6,7 +6,7 @@ class Cliente {
             id: {
                 type: database.db.Sequelize.INTEGER,
                 primaryKey: true,
-                autoIncrement: true 
+                autoIncrement: true
             },
             nome: {
                 type: database.db.Sequelize.STRING,
@@ -20,6 +20,7 @@ class Cliente {
                 type: database.db.Sequelize.STRING,
             }
         })
+
     }
 }
 

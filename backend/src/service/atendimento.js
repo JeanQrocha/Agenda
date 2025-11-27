@@ -1,10 +1,16 @@
 import Atendimento from "../model/atendimento.js";
+import Cliente from "../model/clientes.js";
 
 
 
 class ServiceAtendimento {
     async FindAll() {
-        return Atendimento.findAll()
+        return Atendimento.findAll({
+            include: [{
+                model: Cliente,
+                attributes: ['id', 'nome', 'email']
+            }]
+        })
     }
 
     async FindOne(id) {
@@ -14,7 +20,13 @@ class ServiceAtendimento {
         }
 
 
-        const atendimento = await Atendimento.findByPk(id)
+        const atendimento = await Atendimento.findByPk(id, {
+            include: [{
+                model: Cliente,
+                attributes: ['id', 'nome', 'email']
+            }]
+        })
+
 
         if (!atendimento) {
             throw new Error(`Atendimento ${id} não encontrado`)
@@ -22,24 +34,25 @@ class ServiceAtendimento {
         return atendimento
     }
 
-    async Create(dia, horario, valor, concluido) {
+    async Create(dia, hora, valor, concluido, clienteId) {
 
-        if (!dia || !horario || !valor || concluido === undefined) {
+        if (!dia || !hora || !valor || concluido === undefined || !clienteId) {
 
             throw new Error('Favor preencher todos os campos')
         }
 
         await Atendimento.create({
             dia,
-            horario,
+            hora,
             valor,
-            concluido
+            concluido,
+            clienteId
         })
     }
 
-    async Update(id, dia, horario, valor, concluido) {
+    async Update(id, dia, hora, valor, concluido) {
 
-        if (!id || !dia || !horario || !valor || concluido === undefined) {
+        if (!id || !dia || !hora || !valor || concluido === undefined) {
             throw new Error('Favor informar um ID')
 
         }
@@ -50,7 +63,7 @@ class ServiceAtendimento {
             throw new Error(`Usuario ${id} não encontrado`)
         }
         atendimentoOld.dia = dia || atendimentoOld.dia
-        atendimentoOld.horario = horario || atendimentoOld.horario
+        atendimentoOld.hora = hora || atendimentoOld.hora
         atendimentoOld.valor = valor || atendimentoOld.valor
         atendimentoOld.concluido = concluido || atendimentoOld.concluido
 

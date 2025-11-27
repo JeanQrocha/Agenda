@@ -1,23 +1,35 @@
 import Cliente from '../model/clientes.js'
 import jwt from "jsonwebtoken"
 import bcrypt from 'bcrypt'
+import Atendimento from '../model/atendimento.js'
 
 const JWT_SECRET = "S3gr3do"
 const SALT = 10 // 12
 
 class ServiceCliente {
     async FindAll() {
-        return Cliente.findAll()
+        return Cliente.findAll({
+            include: [{
+                model: Atendimento,
+                attributes: ['dia', 'hora', 'valor', 'concluido']
+            }]
+
+        })
     }
 
     async FindOne(id) {
-        //verificar se o index é valido e se for um numero. verificar se ele for menor q o .lenth
+
         if (!id) {
             throw new Error('Favor informar um ID')
 
         }
 
-        const cliente = await Cliente.findByPk(id)
+        const cliente = await Cliente.findByPk(id, {
+            include: [{
+                model: Atendimento,
+                attributes: ['dia', 'hora', 'valor', 'concluido']
+            }]
+        })
 
         if (!cliente) {
             throw new Error(`Usuario ${id} não encontrado`)
@@ -55,9 +67,9 @@ class ServiceCliente {
 
         clienteOld.nome = nome || clienteOld.nome
         clienteOld.email = email || clienteOld.email
-        clienteOld.senha = senha 
-        ? await bcrypt.hash(String(senha), SALT)
-        :clienteOld.senha
+        clienteOld.senha = senha
+            ? await bcrypt.hash(String(senha), SALT)
+            : clienteOld.senha
 
         return clienteOld.save()
     }
@@ -86,7 +98,7 @@ class ServiceCliente {
 
         // const IsValidPassword = await bcrypt.compare(String(senha), cliente.senha)
         if (
-            !cliente 
+            !cliente
             || !(await bcrypt.compare(String(senha), cliente.senha)) //IsValidPassword
         ) {
             throw new Error("Email ou senha inválidos");
