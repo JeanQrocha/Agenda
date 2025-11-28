@@ -1,0 +1,29 @@
+.div-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.button-home {
+  background: linear-gradient(90deg, #3A0CA3, #2F3CFF);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button-home:hover {
+    filter: brightness(1.15);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 18px rgba(108, 117, 240, 0.4);
+
+}
+
+.button-home:focus,
+.button-home:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}

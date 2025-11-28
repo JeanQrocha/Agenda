@@ -30,7 +30,7 @@ export default function CreateUser() {
         const response = await createUser(user)
 
         if (response.status === 201) {
-            navigate('/Atendimentos')
+            navigate('/')
         } else {
             console.log(response)
         }

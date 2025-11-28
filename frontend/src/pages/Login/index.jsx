@@ -44,7 +44,7 @@ export default function Login() {
           <input type="password" id="senha" required value={senha} onChange={(e) => setSenha(e.target.value)} />
         </div>
         <button className="button" type="submit" onClick={handleLogin}>Entrar</button>
-        <button className="button back-button" onClick={handleBackClick}>
+        <button className="back-button" onClick={handleBackClick}>
           Voltar
         </button>
       </form>

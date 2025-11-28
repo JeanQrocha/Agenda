@@ -30,7 +30,7 @@ class ControllerAtendimento {
     }
     async Create(req, res) {
         try {
-            const { dia, hora, valor, concluido, clienteId } = req.body 
+            const { dia, hora, valor, concluido, clienteId } = req.body
 
             await ServiceAtendimento.Create(dia, hora, valor, concluido, clienteId)
 

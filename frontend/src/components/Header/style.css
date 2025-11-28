@@ -1,0 +1,13 @@
+header {
+    background: linear-gradient(90deg, #3A0CA3 10%, #2F3CFF 100%);
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    gap: 10px;
+}
+
+.h1-header {
+    font-size: 25px;
+}

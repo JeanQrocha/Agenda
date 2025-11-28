@@ -9,15 +9,15 @@ router.post("/Login", ControllerCliente.Login)
 //  api/v1
 
 
-router.get("/user/context",ControllerCliente.FindOne) 
-router.post("/user/", ControllerCliente.Create) 
-router.put("/user/",ControllerCliente.Update) 
-router.delete("/user/",ControllerCliente.Delete) 
+router.get("/cliente/context",ControllerCliente.FindOne) 
+router.post("/cliente/", ControllerCliente.Create) 
+router.put("/cliente/",ControllerCliente.Update) 
+router.delete("/cliente/",ControllerCliente.Delete) 
 
-router.get("/users", authMiddleware(), ControllerCliente.FindAll) //pegar todos
-router.get("/user/:id", authMiddleware(), ControllerCliente.FindOne) //pegar um
-router.post("/user/admin", authMiddleware(), ControllerCliente.Create) //cadastrar um
-router.put("/user/:id", authMiddleware(),  ControllerCliente.Update) //alterar um
-router.delete("/user/:id", authMiddleware(), ControllerCliente.Delete) // deletar um
+router.get("/clientes", authMiddleware(), ControllerCliente.FindAll) //pegar todos
+router.get("/cliente/:id", authMiddleware(), ControllerCliente.FindOne) //pegar um
+router.post("/cliente/admin", authMiddleware(), ControllerCliente.Create) //cadastrar um
+router.put("/cliente/:id", authMiddleware(),  ControllerCliente.Update) //alterar um
+router.delete("/cliente/:id", authMiddleware(), ControllerCliente.Delete) // deletar um
 
 export default router

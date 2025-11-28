@@ -37,8 +37,8 @@ function Atendimentos() {
 
     return (
         <main>
-                <Link to='/create/atendimento'>
-                    <button>Criar Atendimento</button>
+                <Link to='/CriarAtendimento'>
+                    <button className='btnCreateAtn'>Criar Atendimento</button>
                 </Link>
             <div className='user-list'>
                 <div className='userheader' key='header'>

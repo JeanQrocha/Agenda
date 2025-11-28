@@ -2,5 +2,10 @@ footer {
     background-color: #290e8d;
     color: white;
     text-align: center;
-    padding: 0.5em;
+    padding: 2px;
+
+}
+
+.p-footer {
+    font-size: 15px;
 }
