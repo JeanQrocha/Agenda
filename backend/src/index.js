@@ -11,7 +11,7 @@ app.use(cors()); //liberar acesso de outras origens
 
 app.use('/api/v1', router , atendimento) //definir a rota base da api
 
-const port = 3000 //definir a porta do servidor
+const port = 5432 //definir a porta do servidor
 
 database.db     
     .sync({ force: false }) //sincronizar o banco de dados
