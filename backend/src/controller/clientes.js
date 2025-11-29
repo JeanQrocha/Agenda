@@ -38,7 +38,7 @@ class ControllerCliente {
 
             await ServiceCliente.Create(nome, email, senha, ativo)
 
-            res.status(201).send()
+            res.status(200).send()
         } catch (error) {
             res.status(500).send({ error: error.message })
         }
