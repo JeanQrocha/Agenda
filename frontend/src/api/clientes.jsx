@@ -11,16 +11,16 @@ export const getUsers = async () => {
 } 
 
 
-export const createUser = async (user) => {    
-    const response =  await api.post('/api/v1/cliente', user) 
+export const createUser = async (cliente) => {    
+    const response =  await api.post('/api/v1/cliente', cliente) 
 
     if(response.status !== 201){
         throw new Error('Erro ao criar usuário')
     }
     return response 
 }
-export const updateUser = async (id, user) => { 
-    const response = await api.put(`/api/v1/cliente/${id}`, user)     
+export const updateUser = async (id, cliente) => { 
+    const response = await api.put(`/api/v1/cliente/${id}`, cliente)     
     if(response.status !== 204){
         throw new Error('Erro ao deletar usuário')
     }                       
