@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({ //cria uma instância do axios
-    baseURL: "http://localhost:3000", //define a URL base da API
+    baseURL: "https://agenda-4-neni.onrender.com", //define a URL base da API
 })
 
 api.interceptors.request.use( //adiciona um interceptor para requisições
