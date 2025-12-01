@@ -10,7 +10,8 @@ import Login from './pages/Login'
 import { AuthProvider } from './auth/context'
 import PrivateRoute from './router/PrivateRoute'
 import Home from './pages/Home'
-import CriarAtendimento from "./pages/CriarAtendimento/criarAtendimento"
+import CriarAtendimento from "./pages/Atendimento/criarAtendimento"
+import UpdateAtendimento from './pages/Atendimento/updateAtendimento'
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path='/Atendimentos' element={<Atendimentos />} />
           <Route path="/CriarAtendimento" element={<CriarAtendimento />} />
+          <Route path="/EditarAtendimento" element={<UpdateAtendimento />} />
+
         </Route>
       </Routes>
 

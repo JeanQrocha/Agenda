@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react"
-import { updateUser } from "../../api/users";
-import { useLocation, useNavigate } from "react-router-dom";
+import { updateUser } from "../../api/clientes";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import './styles.css'
 import { toast } from "react-toastify";
 
 export default function UpdateUser() {
     const navigate = useNavigate()
-    const [atendimento, setatendimento] = useState({
+    const [user, setUser] = useState({
         nome: '',
         email: '',
         senha: '',
     })
     // adicionar userLocation novo para pegar o state passado anteriormente
     const location = useLocation()
-    const { atendimento: prevAtendimento} = location.state
+    const { user: prevUser} = location.state
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -26,7 +26,7 @@ export default function UpdateUser() {
     const handleReset = (e) => {
         e.preventDefault()
         // alterado do init para o prev
-        setUser({ ...prevUser, senha: '' })
+        setUser({ ...user})
     }
 
     const handleSave = async (e) => {
@@ -45,38 +45,33 @@ export default function UpdateUser() {
 
     // Adicionado
     useEffect(() => {
-        setUser({ ...prevUser, senha: '' })
+        setUser({ ...prevUser })
     }, [])
 
     return (
         <div className="form">
             <form>
+                <div>
+                    <h2 className="h2-form">Editar Atendimento</h2>
+                </div>
                     <div>
-                        <label>dia:</label>
-                        <input type="text" id="dia" value={atendimento.dia} onChange={handleChange} />
+                        <label>Nome:</label>
+                        <input type="text" id="dia" value={user.nome} onChange={handleChange} />
                     </div>
 
                     <div>
-                        <label>hora:</label>
-                        <input type="text" id="hora" value={atendimento.hora} onChange={handleChange} />
+                        <label>Email:</label>
+                        <input type="text" id="hora" value={user.email} onChange={handleChange} />
                     </div>
 
                     <div>
-                        <label>valor:</label>
-                        <input type="text" id="valor" value={atendimento.valor} onChange={handleChange} />
-                    </div>
-
-                    <div>
-                        <label>concluído:</label>
-                        <input type="checkbox" id="concluido" checked={atendimento.concluido} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label>Numero de Registro:</label>
-                        <input type="text" id="clienteId" value={atendimento.clienteId} onChange={handleChange} />
+                        <label>Senha:</label>
+                        <input type="text" id="valor" value={user.Senha} onChange={handleChange} />
                     </div>
 
                     <div>
                         <button type="reset" onClick={handleReset}>Limpar</button>
+                        <Link to='/'><button>Voltar</button></Link>
                         <button type="submit" onClick={handleSave}>Criar</button>
                     </div>
                 </form>

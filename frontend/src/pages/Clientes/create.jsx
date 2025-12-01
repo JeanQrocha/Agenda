@@ -3,6 +3,7 @@ import { createUser } from "../../api/clientes"
 import { useNavigate } from "react-router-dom"
 import './styles.css'
 import { Link } from "react-router-dom"
+import { toast } from "react-toastify"
 
 const INITIAL_STATE = {
     nome: '',
@@ -25,11 +26,12 @@ export default function CreateUser() {
     const hendleSave = async (e) => {
         e.preventDefault()
         if (!user.nome || !user.email || !user.senha) {
-            return alert('Preencha todos os campos')
+            toast.warning('Preencha todos os campos')
         }
         const response = await createUser(user)
 
         if (response.status === 201) {
+            toast.done("Usuario criado com sucesso")
             navigate('/')
         } else {
             console.log(response)
