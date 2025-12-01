@@ -10,8 +10,8 @@ import Login from './pages/Login'
 import { AuthProvider } from './auth/context'
 import PrivateRoute from './router/PrivateRoute'
 import Home from './pages/Home'
-import CriarAtendimento from "./pages/Atendimento/criarAtendimento"
-import UpdateAtendimento from './pages/Atendimento/updateAtendimento'
+import CriarAtendimento from './pages/CriarAtendimento/criarAtendimento'
+import UpdateAtendimento from './pages/CriarAtendimento/updateAtendimento'
 
 
 function App() {
