@@ -27,9 +27,9 @@ function Atendimentos() {
 
 
 
-    useEffect(() => {
+    useEffect((id) => {
         async function carregar() {
-            const allUsers = await getAtendimento()
+            const allUsers = await getAtendimento(id)
             setUsers(allUsers)
         }
         carregar()

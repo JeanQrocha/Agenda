@@ -1,7 +1,7 @@
 import api from "./api"
 
 export const getAtendimentos = async () => { 
-    const response = await api.get(`/api/v1/atendimento/`) 
+    const response = await api.get(`/api/v1/atendimentos`) 
 
     if(response.status !== 200){
         throw new Error('Erro ao buscar usuários')
