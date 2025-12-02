@@ -1,13 +1,24 @@
 import api from "./api"
 
 export const getAtendimentos = async () => { 
-    const response = await api.get('/api/v1/atendimentos') 
+    const response = await api.get(`/api/v1/atendimento/`) 
 
     if(response.status !== 200){
         throw new Error('Erro ao buscar usuários')
     }
 
-    return response.data.atendimentos 
+    return response.data.atendimentos
+} 
+
+
+export const getAtendimento = async (id) => { 
+    const response = await api.get(`/api/v1/atendimento/${id}`) 
+
+    if(response.status !== 200){
+        throw new Error('Erro ao buscar usuários')
+    }
+
+    return response.data.atendimento 
 } 
 
 

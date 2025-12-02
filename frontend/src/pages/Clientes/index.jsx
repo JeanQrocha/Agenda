@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './styles.css'
 import { toast } from "react-toastify"
-import { deleteAtendimento, getAtendimentos, updateAtendimento } from '../../api/atendimento'
+import { deleteAtendimento, getAtendimento, updateAtendimento } from '../../api/atendimento'
 
 function Atendimentos() {
 
@@ -29,7 +29,7 @@ function Atendimentos() {
 
     useEffect(() => {
         async function carregar() {
-            const allUsers = await getAtendimentos()
+            const allUsers = await getAtendimento()
             setUsers(allUsers)
         }
         carregar()
