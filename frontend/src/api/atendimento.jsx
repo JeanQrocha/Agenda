@@ -18,7 +18,7 @@ export const getAtendimento = async (id) => {
         throw new Error('Erro ao buscar usuários')
     }
 
-    return response.data.atendimento 
+    return response.data.atendimentos
 } 
 
 

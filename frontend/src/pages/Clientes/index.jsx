@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './styles.css'
 import { toast } from "react-toastify"
 import { deleteAtendimento, getAtendimentos, updateAtendimento } from '../../api/atendimento'
+import { AuthContext } from '../../auth/context'
 
 function Atendimentos() {
 
-
+    const {userId} = useContext(AuthContext)
     const [atendimentos, setUsers] = useState([])
 
     const handleDelete = async (id) => {
@@ -29,11 +30,11 @@ function Atendimentos() {
 
     useEffect(() => {
         async function carregar() {
-            const allUsers = await getAtendimentos()
+            const allUsers = await getAtendimentos(userId)
             setUsers(allUsers)
         }
-        carregar()
-    }, [])
+       if (userId) carregar()
+    }, [userId])
 
     return (
         <main>

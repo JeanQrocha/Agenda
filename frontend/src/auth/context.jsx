@@ -1,45 +1,55 @@
 import { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
-const isTokenValid = (token) => { // Função para verificar se o token é válido
+export const AuthContext = createContext();
+
+const isTokenValid = (token) => {
    try {
-      const decoded = jwtDecode(token); // Decodifica o token JWT
-      const currentTime = Date.now() / 1000; // Tempo atual em segundos
-      return decoded.exp > currentTime; // Verifica se o token expirou
-   } catch (error) {
-      return false; // Retorna falso se o token for inválido
+      const decoded = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+      return decoded.exp > currentTime;
+   } catch {
+      return false;
    }
-}
+};
 
+export const AuthProvider = ({ children }) => {
+   const [token, setToken] = useState(null);
+   const [userId, setUserId] = useState(null);
 
-export const AuthContext = createContext(); // Criando o contexto de autenticação
+   const login = (token) => {
+      const decoded = jwtDecode(token);
+      setToken(token);
+      setUserId(decoded.id); // <<< ID DO USUÁRIO AQUI
 
-export const AuthProvider = ({ children }) => { // Componente provedor de autenticação
-   const [token, setToken] = useState(null); // Estado para armazenar o token de autenticação
-   
-   // const [role, setRole] = useState(null); // Estado para armazenar o papel do usuário
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", decoded.id);
+   };
 
-   const login = (token) => { // Função para fazer login
-      setToken(token) // Define o token no estado  
-      localStorage.setItem('token', token) // Armazena o token no localStorage
-   }
+   const logout = () => {
+      setToken(null);
+      setUserId(null);
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+   };
 
-   const logout = () => { // Função para fazer logout
-      setToken(null) // Remove o token do estado
-      localStorage.removeItem('token') // Remove o token do localStorage
-   }
    useEffect(() => {
-      const storedToken = localStorage.getItem('token'); // Pega o token do localStorage
-      if (storedToken && isTokenValid(storedToken)) {  // Verifica se o token é válido
-         setToken(storedToken); // Define o token no estado se for válido
+      const storedToken = localStorage.getItem("token");
+
+      if (storedToken && isTokenValid(storedToken)) {
+         const decoded = jwtDecode(storedToken);
+
+         setToken(storedToken);
+         setUserId(decoded.id); // <<< RECUPERA AO RECARREGAR
       } else {
-         localStorage.removeItem('token'); // Remove o token inválido do localStorage
+         localStorage.removeItem("token");
+         localStorage.removeItem("userId");
       }
-   }, []); // Executa apenas uma vez quando o componente é montado
+   }, []);
 
    return (
-      <AuthContext.Provider value={{ token, login, logout }}>
+      <AuthContext.Provider value={{ token, userId, login, logout }}>
          {children}
-      </AuthContext.Provider>  // -> Renderiza os componentes filhos // ->>Fornece o contexto de autenticação para os componentes filhos // ->>> Finaliza o provedor de contexto
+      </AuthContext.Provider>
    );
-}
+};

@@ -3,22 +3,22 @@ import ServiceUser from "../service/clientes.js"
 
 const JWT_SECRET = "S3gr3do"
 
-export default  function authMiddleware(roles = []) {
+export default function authMiddleware(roles = []) {
     return async (req, res, next) => {
         try {
             const token = req.headers['authorization']
 
-            token.split(` `)[1]
+            const tokenJwt = token.split(" ")[1];
 
             if (!token) {
                 throw new error(" Você nao tem permissão para realizar essa ação")
             }
 
-            const decoded = jwt.verify(token.split(` `)[1], JWT_SECRET)
+            const decoded = jwt.verify(tokenJwt, JWT_SECRET)
 
             const user = await ServiceUser.FindOne(decoded.id)
 
-            if (roles.length && 
+            if (roles.length &&
                 !roles.includes(user.permissao)) {
                 throw new Error("Você nao tem permissão para realizar essa ação")
             }

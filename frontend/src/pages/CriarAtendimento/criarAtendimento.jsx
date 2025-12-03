@@ -9,7 +9,6 @@ const INITIAL_STATE = {
     hora: '',
     valor: '',
     concluido: false,
-    clienteId: '',
 }
 
 export default function CriarAtendimento() {
@@ -28,13 +27,13 @@ export default function CriarAtendimento() {
     const handleSave = async (e) => {
         e.preventDefault()
 
-        if (!atendimento.dia || !atendimento.hora || !atendimento.valor || !atendimento.clienteId ) {
+        if (!atendimento.dia || !atendimento.hora || !atendimento.valor ) {
             return toast.error('Preencha todos os campos')
         }
 
         const response = await createAtendimento(atendimento)
 
-        if (response.status === 200) {
+        if (response.status === 201) {
             toast.success("Atendimento criado com sucesso")
             navigate('/Atendimentos')
         } else {
@@ -70,10 +69,6 @@ export default function CriarAtendimento() {
                     <div>
                         <label>concluído:</label>
                         <input type="checkbox" id="concluido" checked={atendimento.concluido} onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label>Numero de Registro:</label>
-                        <input type="text" id="clienteId" value={atendimento.clienteId} onChange={handleChange} />
                     </div>
 
                     <div>
