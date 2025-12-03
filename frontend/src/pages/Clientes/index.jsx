@@ -2,12 +2,11 @@ import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './styles.css'
 import { toast } from "react-toastify"
-import { deleteAtendimento, getAtendimento, updateAtendimento } from '../../api/atendimento'
-import { AuthContext } from '../../auth/context'
+import { deleteAtendimento, getAtendimentos, updateAtendimento } from '../../api/atendimento'
 
 function Atendimentos() {
 
-    const {userId} = useContext(AuthContext)
+
     const [atendimentos, setUsers] = useState([])
 
     const handleDelete = async (id) => {
@@ -18,7 +17,7 @@ function Atendimentos() {
             return
         }
 
-        setUsers(atds => atds.filter(atd => atd.id !== id)) 
+        setUsers(atds => atds.filter(atd => atd.id !== id))
 
     }
 
@@ -30,20 +29,20 @@ function Atendimentos() {
 
     useEffect(() => {
         async function carregar() {
-            const allUsers = await getAtendimento(userId)
+            const allUsers = await getAtendimentos()
             setUsers(allUsers)
         }
-       if (userId) carregar()
-    }, [userId])
+        carregar()
+    }, [])
 
     return (
         <main>
             <nav>
-                 <Link to='/CriarAtendimento'>
+                <Link to='/CriarAtendimento'>
                     <button className='btnCreateAtn'>Criar Atendimento</button>
                 </Link>
-                <Link to='/EditarAtendimento'> 
-                <button className='btnCreateAtn'>Editar Usuário</button>
+                <Link to='/EditarAtendimento'>
+                    <button className='btnCreateAtn'>Editar Usuário</button>
                 </Link>
 
 
