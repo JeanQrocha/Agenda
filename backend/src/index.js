@@ -8,7 +8,7 @@ const app = express(); //criar a aplicação express
 
 app.use(express.json()) //habilitar o express para receber json no body
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://agenda-4-neni.onrender.com'],
+  origin: ['http://localhost:5173', 'http://localhost:3000'],
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization'
 })); //liberar acesso de outras origens

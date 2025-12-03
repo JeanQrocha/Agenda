@@ -11,7 +11,7 @@ import { AuthProvider } from './auth/context'
 import PrivateRoute from './router/PrivateRoute'
 import Home from './pages/Home'
 import CriarAtendimento from './pages/CriarAtendimento/criarAtendimento'
-import UpdateAtendimento from './pages/CriarAtendimento/updateAtendimento'
+import UpdateAtendimento from './pages/EditarAtendimento/updateAtendimento'
 
 
 function App() {

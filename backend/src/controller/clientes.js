@@ -36,9 +36,9 @@ class ControllerCliente {
             }
             const { nome, email, senha, ativo } = req.body
 
-            const create = await ServiceCliente.Create(nome, email, senha, ativo)
+           const criado = ServiceCliente.Create(nome, email, senha, ativo)
 
-            res.status(200).send({ create })
+            res.status(200).send({criado})
         } catch (error) {
             res.status(500).send({ error: error.message })
         }
@@ -49,9 +49,9 @@ class ControllerCliente {
             const id = req.params.id || req.headers?.user?.id
             const { nome, email, senha, ativo } = req.body
 
-            const update = ServiceCliente.Update(id, nome, email, senha, ativo)
+            ServiceCliente.Update(id, nome, email, senha, ativo)
 
-            res.status(200).send({ update })
+            res.status(200).send()
         } catch (error) {
             res.status(500).send({ error: error.message })
         }
