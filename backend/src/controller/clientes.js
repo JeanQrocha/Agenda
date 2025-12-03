@@ -5,7 +5,7 @@ import ServiceCliente from "../service/clientes.js"
 
 class ControllerCliente {
     async FindAll(_, res) { //se nao for usar o parametro colocar um '_'
-        try {   
+        try {
             const users = await ServiceCliente.FindAll()
             res.send({ users })
 
@@ -31,14 +31,14 @@ class ControllerCliente {
         try {
             const loggedUser = req.headers?.user
             let permissao = 1
-            if(loggedUser){
+            if (loggedUser) {
                 permissao = req.body.permissao
             }
             const { nome, email, senha, ativo } = req.body
 
-            await ServiceCliente.Create(nome, email, senha, ativo)
+            const create = await ServiceCliente.Create(nome, email, senha, ativo)
 
-            res.status(201).send()
+            res.status(200).send({ create })
         } catch (error) {
             res.status(500).send({ error: error.message })
         }
@@ -49,9 +49,9 @@ class ControllerCliente {
             const id = req.params.id || req.headers?.user?.id
             const { nome, email, senha, ativo } = req.body
 
-            ServiceCliente.Update(id, nome, email, senha, ativo)
+            const update = ServiceCliente.Update(id, nome, email, senha, ativo)
 
-            res.status(200).send()
+            res.status(200).send({ update })
         } catch (error) {
             res.status(500).send({ error: error.message })
         }
@@ -59,11 +59,11 @@ class ControllerCliente {
 
     async Delete(req, res) {
         try {
-            const id = req.params.id || req.headers?.user?.id   
+            const id = req.params.id || req.headers?.user?.id
 
             await ServiceCliente.Delete(id)
 
-            res.status(204).send()
+            res.status(204).send({ message: "Usuário deletado com sucesso" })
         } catch (error) {
             res.status(500).send({ error: error.message })
         }

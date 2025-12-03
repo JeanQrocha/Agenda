@@ -34,7 +34,7 @@ export default function CriarAtendimento() {
 
         const response = await createAtendimento(atendimento)
 
-        if (response.status === 201) {
+        if (response.status === 200) {
             toast.success("Atendimento criado com sucesso")
             navigate('/Atendimentos')
         } else {
